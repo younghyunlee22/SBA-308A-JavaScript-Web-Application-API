@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pomodoro Planner</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat&family=Victor+Mono&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"
+      integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm"
+      crossorigin="anonymous"
+    />
+    <link href="style.css" rel="stylesheet" type="text/css" />
+    <link
+      rel="/images/apple-touch-icon"
+      sizes="180x180"
+      href="./images/apple-touch-icon.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="./images/favicon-32x32.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="./images/favicon-16x16.png"
+    />
+    <link rel="manifest" href="./images/site.webmanifest" />
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script type="module" src="script.js"></script>
+  </head>
+  <body>
+    <div id="wrapper" class="wrapper">
+      <h1 class="plannerTitle">Pomodoro Planner</h1>
+      <div id="input-section">
+        <form action="#">
+          <label for="username">Your name: </label>
+          <!--input with HTML attribute validation-->
+          <input
+            id="username"
+            type="text"
+            minlength="2"
+            maxlength="15"
+            required
+          />
+          <button id="username-button" class="button">Enter</button>
+        </form>
+        <br />
+        <p class="instruction">
+          Make a pomodoro set(4 tasks). <br />
+          Each task will be followed by a 5-minute break. <br />
+          A 20-minute break will be added after a set.<br />
+          Make more sets if you want. <br />
+          You can duplicate your current set(s) to the end of the list <br />
+          by clicking on 'Duplicate the pomodoro set' button.
+        </p>
+        <form name="pomodoro-form" id="pomodoro-form">
+          <input type="number" name="minute" size="7" placeholder="Minutes" />
+          <input
+            type="text"
+            name="task"
+            size="30"
+            placeholder="Enter a single task to work on"
+            onclick="clearInput()"
+          />
+          <input type="submit" value="Add Task" />
+        </form>
+      </div>
+      <form id="font-options">
+        <div style="padding-left: 50px">
+          <label for="font">Choose font style:</label>
+          <select name="font" id="font">
+            <option value="montserrat">Montserrat</option>
+            <option value="sans-serif">Sans-serif</option>
+            <option value="monospace">Monospace</option>
+          </select>
+        </div>
+      </form>
+      <h2 class="title">Your plan for today:</h2>
+      <div id="parent-list" class="pomodoro-list">
+        <ol id="child-ol" class="task-list"></ol>
+        <div id="child-list"></div>
+      </div>
+    </div>
+    <button id="duplicate-button">Duplicate the pomodoro set</button>
+    <button id="undo-duplicate">Delete the most recent duplicate</button> </br>
+
+    <div id="todo-examples">
+      <h3>🎯 Would you like to see what tasks other people have planned?
+      <button id="todoExamples">Yes!</button> </h3></div>
+  </body>
+</html>
