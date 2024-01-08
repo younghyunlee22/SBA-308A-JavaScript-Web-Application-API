@@ -93,10 +93,23 @@
       </div>
     </div>
     <button id="duplicate-button">Duplicate the pomodoro set</button>
-    <button id="undo-duplicate">Delete the most recent duplicate</button> </br>
+    <button id="undo-duplicate">Delete the most recent duplicate</button>
 
     <div id="todo-examples">
-      <h3>🎯 Would you like to see what tasks other people have planned?
-      <button id="todoExamples">Yes!</button> </h3></div>
+      <h3>
+        🎯 Would you like to see what tasks other people have planned?
+        <button id="todoExamples">Yes!</button>
+      </h3>
+    </div>
+    <footer>
+      <p>&copy; 2024 Pomodoro Planner. All rights reserved.</p>
+    </footer>
   </body>
+  <script>
+    let myForm = document.getElementById("pomodoro-form");
+
+    function clearInput() {
+      myForm.task.value = "";
+    }
+  </script>
 </html>

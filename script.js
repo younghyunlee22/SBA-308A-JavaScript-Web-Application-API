@@ -1,7 +1,6 @@
 import { getTodos } from "./getTodo.js";
 import { displayTodos } from "./display.js";
-
-console.log("hi");
+import { handleAddTask } from "./addTodo.js";
 
 let userName = document.getElementById("username");
 
@@ -20,55 +19,9 @@ enterButton.addEventListener("click", function () {
   }
 });
 
-let myForm = document.getElementById("pomodoro-form");
-
 let taskList = document.getElementById("child-ol");
 
-myForm.addEventListener("submit", function (e) {
-  e.preventDefault();
-  const minutes = myForm.minute.value;
-  const task = myForm.task.value;
-  const isValid = validateTaskForm(minutes, task);
-
-  if (isValid) {
-    const newLi = document.createElement("li");
-    newLi.innerHTML = `For ${minutes} minutes: ${task}.<button class="remove-button">Remove</button>`;
-    taskList.appendChild(newLi);
-
-    const liCollection = document.querySelectorAll("#child-ol li");
-
-    const breakTime = document.createElement("p");
-    // Iterate over a collection of elements to add a break time to the list
-    liCollection.forEach((item, index) => {
-      if ((index + 1) % 4 == 0) {
-        breakTime.innerHTML = `Take a 20-minute break. <br/>
-    <img id="tomato-icon" src="./images/favicon-32x32.png" alt="tomato-icon"><img id="tomato-icon" src="./images/favicon-32x32.png" alt="tomato-icon"><img id="tomato-icon" src="./images/favicon-32x32.png" alt="tomato-icon"><img id="tomato-icon" src="./images/favicon-32x32.png" alt="tomato-icon">`;
-        newLi.appendChild(breakTime);
-      } else {
-        breakTime.innerHTML = `Take a 5-minute break.`;
-        newLi.appendChild(breakTime);
-      }
-    });
-  }
-});
-
-function clearInput() {
-  myForm.task.value = "";
-}
-
-// DOM event-based validation
-function validateTaskForm(minutes, task) {
-  if (minutes < 5 || minutes > 90) {
-    // BOM 1. alert
-    alert("mininum 5 mins, maximum 90 mins");
-    return false;
-  }
-  if (task.trim() == "") {
-    alert("Enter a task");
-    return false;
-  }
-  return true;
-}
+myForm.addEventListener("submit", handleAddTask);
 
 // Remove a task
 document.addEventListener("click", function (e) {
@@ -80,7 +33,6 @@ document.addEventListener("click", function (e) {
   }
 });
 
-// HTML templating with the cloneNode method, Use appendChild
 const nodeCurrPlan = document.querySelector(".pomodoro-list");
 const duplicateButton = document.getElementById("duplicate-button");
 duplicateButton.addEventListener("click", function () {
