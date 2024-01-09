@@ -41,7 +41,14 @@
   </head>
   <body>
     <div id="wrapper" class="wrapper">
-      <h1 class="plannerTitle">Pomodoro Planner</h1>
+      <h1 class="plannerTitle">
+        <img
+          id="tomato-icon"
+          src="./images/favicon-32x32.png"
+          alt="tomato-icon"
+        />
+        Pomodoro Planner
+      </h1>
       <div id="input-section">
         <form action="#">
           <label for="username">Your name: </label>
@@ -100,10 +107,8 @@
         🎯 Would you like to see what tasks other people have planned?
         <button id="todoExamples">Yes!</button>
       </h3>
+      <div id="todo-list"></div>
     </div>
-    <footer>
-      <p>&copy; 2024 Pomodoro Planner. All rights reserved.</p>
-    </footer>
   </body>
   <script>
     let myForm = document.getElementById("pomodoro-form");

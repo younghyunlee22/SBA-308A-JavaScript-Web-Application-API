@@ -17,10 +17,11 @@ export async function handleAddTask(e) {
       });
 
       const newTodo = response.data;
-      console.log("New todo created:", newTodo);
+      alert(`New task posted for user id ${newTodo.userId}: ${newTodo.todo}`);
+      console.log("POST request successful", newTodo);
 
       const newLi = document.createElement("li");
-      newLi.innerHTML = `<p>For ${minutes} minutes: ${newTodo.todo}. <button class="remove-button">Remove</button>
+      newLi.innerHTML = `<p>For ${minutes} minutes: ${task}. <button class="remove-button">Remove</button>
       `;
       taskList.appendChild(newLi);
 

@@ -66,14 +66,86 @@ fontOptionsForm.addEventListener("change", function (e) {
   listDiv.style.fontFamily = `${selectedFont}`;
 });
 
+const limit = 10;
+let page = 1;
+let isHidden = false;
+let buttonsShown = false;
+
 getTodoButton.addEventListener("click", handleGetTodo);
 async function handleGetTodo() {
   try {
-    const todosArr = await getTodos();
-    console.log(todosArr);
+    const todoList = document.getElementById("todo-list");
+    if (!isHidden) {
+      const todosArr = await getTodos(limit, page);
+      console.log(todosArr);
 
-    displayTodos(todosArr);
+      displayTodos(todosArr);
+
+      if (!buttonsShown) {
+        showButtons();
+        buttonsShown = true;
+      }
+    }
+
+    if (!isHidden) {
+      getTodoButton.textContent = "Hide";
+      todoPages.style.display = "flex";
+      todoList.style.display = "block";
+    } else {
+      getTodoButton.textContent = "Yes!";
+      todoList.style.display = "none";
+      todoPages.style.display = "none";
+    }
+    isHidden = !isHidden;
   } catch (error) {
     console.error("handleGetTodo", error);
   }
+}
+
+const todoSection = document.getElementById("todo-examples");
+const todoPages = document.createElement("div");
+
+async function goPage(newPage) {
+  page = newPage;
+
+  const todosArr = await getTodos(limit, page);
+  displayTodos(todosArr);
+
+  let buttons = [...todoPages.children];
+  console.log("Line 96", buttons);
+
+  for (let i = 0; i < buttons.length; i++) {
+    console.log(i, page);
+    if (i != page - 1) {
+      buttons[i].className = "";
+    } else {
+      buttons[i].className = "selectedPage";
+    }
+  }
+}
+
+todoPages.id = "todoPages";
+
+async function showButtons() {
+  const allTodos = await axios.get("https://dummyjson.com/todos");
+  console.log(allTodos);
+  const numPages = allTodos.data.limit / 10;
+  console.log(numPages);
+  for (let i = 0; i < numPages; i++) {
+    const btn = document.createElement("button");
+    if (i == 0) {
+      btn.className = "selectedPage";
+    }
+
+    btn.textContent = i + 1;
+
+    btn.addEventListener("click", () => {
+      goPage(i + 1);
+    });
+
+    todoPages.appendChild(btn);
+  }
+
+  todoSection.appendChild(todoPages);
+  console.log(todoPages);
 }

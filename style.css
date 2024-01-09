@@ -59,3 +59,13 @@ h2 {
 #todo-examples {
   padding-top: 50px;
 }
+
+#todoPages {
+  display: flex;
+  justify-content: center;
+}
+
+.selectedPage {
+  background-color: darksalmon;
+  color: black;
+}
